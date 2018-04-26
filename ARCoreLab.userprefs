@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{8764BD16-2B77-A912-55F6-C319806DEB90}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ARCoreLab/ARPortal/Scripts/PortalController.cs">
+    <Files>
+      <File FileName="Assets/ARCoreLab/ARPortal/Scripts/PortalController.cs" Line="20" Column="55" />
+      <File FileName="Assets/ARCoreLab/ARPortal/Materials/Shaders/SkyboxProcedural.shader" Line="25" Column="6" />
+      <File FileName="Assets/ARCoreLab/ARPortal/Materials/Shaders/StencilFilter.shader" Line="12" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.ARCoreLab PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
