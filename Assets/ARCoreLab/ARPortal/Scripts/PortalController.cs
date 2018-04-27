@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class PortalController : MonoBehaviour {
+public class PortalController : MonoBehaviour
+{
+
+    public Transform device;
 
     public Material[] materials;
 
@@ -13,27 +16,31 @@ public class PortalController : MonoBehaviour {
     bool hasCollided = false;
 
 
-	// Use this for initialization
-	void Start () {
-        SetStencilMaterials(true);
-	}
+    // Use this for initialization
+    void Start()
+    {
+        SetStencilMaterials(false);
+    }
 
-    void SetStencilMaterials(bool fullRender){
+    void SetStencilMaterials(bool fullRender)
+    {
 
-        var stencilTest = fullRender ? CompareFunction.Equal : CompareFunction.NotEqual;
-        foreach (var mat in materials){
-            mat.SetInt("_StencilTest", (int) stencilTest);
+        var stencilTest = fullRender ? CompareFunction.NotEqual : CompareFunction.Equal;
+        foreach (var mat in materials)
+        {
+            mat.SetInt("_StencilTest", (int)stencilTest);
         }
     }
 
-    bool GetIsInFront(){
+    bool GetIsInFront()
+    {
 
-        Vector3 camWorldPosition = Camera.main.transform.position + Camera.main.transform.forward * Camera.main.nearClipPlane;
+        Vector3 camWorldPosition = device.position + device.forward * device.GetComponent<Camera>().nearClipPlane;
 
         Vector3 cameraRelativePosition = transform.InverseTransformPoint(camWorldPosition);
 
         return cameraRelativePosition.z <= 0;
-       
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,14 +49,13 @@ public class PortalController : MonoBehaviour {
         hasCollided = true;
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.name != Camera.main.name){
-            return;
-        }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if(other.name != Camera.main.name){
+    //        return;
+    //    }
 
-
-    }
+    //}
 
     private void OnTriggerExit(Collider other)
     {
@@ -57,23 +63,30 @@ public class PortalController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
-        if(hasCollided){
+        //Debug.Log(device.name);
+
+        if (hasCollided)
+        {
 
             if ((wasInFront && !GetIsInFront()) || (!wasInFront && GetIsInFront()))
             {
+
+                Debug.Log("bian");
+
                 isInARWorld = !isInARWorld;
-                SetStencilMaterials(!isInARWorld);
+                SetStencilMaterials(isInARWorld);
             }
 
             wasInFront = GetIsInFront();
-          
+
         }
-	}
+    }
 
     private void OnDestroy()
     {
-        SetStencilMaterials(false);
+        SetStencilMaterials(true);
     }
 }
